@@ -1,0 +1,5 @@
+{
+    "domains": ["baddomain.com", "untrusteddomain.com"],    
+    "transportRuleName": "Unsafe sender list",
+    "spamConfidenceLevel": "9"
+}

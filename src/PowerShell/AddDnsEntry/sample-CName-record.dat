@@ -1,0 +1,7 @@
+{
+    "dnsRecordName": "web",
+    "dnsRecordValue": "www.iddportal.no",
+    "zoneName": "iddportal.no",
+    "resourceGroupName": "servicemanagertest",
+    "recordType": "CNAME"
+}

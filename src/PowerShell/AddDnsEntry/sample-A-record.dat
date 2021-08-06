@@ -1,0 +1,7 @@
+{
+    "dnsRecordName": "yankee",
+    "dnsRecordValue": "81.166.148.82",
+    "zoneName": "iddportal.no",
+    "resourceGroupName": "servicemanagertest",
+    "recordType": "A"
+}
