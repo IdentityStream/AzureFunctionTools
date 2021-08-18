@@ -1,7 +1,7 @@
 const httpSignature = require("http-signature");
 const httpDigest = require("@digitalbazaar/http-digest-header");
 
-async function isRequestSignatureValid(request) {
+async function isRequestSignatureValid(request, secret) {
   var cloned = JSON.parse(JSON.stringify(request));
   cloned.method = "post";
   const url = new URL(cloned.originalUrl);
@@ -20,9 +20,7 @@ async function isRequestSignatureValid(request) {
     console.log("accepted digest");
   }
   var parsed = httpSignature.parseRequest(cloned);
-  if (
-    !httpSignature.verifyHMAC(parsed, "42e88981-05a9-4e60-8d39-31737447e30b")
-  ) {
+  if (!httpSignature.verifyHMAC(parsed, secret)) {
     console.log("Rejected signature");
     return false;
   }
@@ -32,7 +30,8 @@ async function isRequestSignatureValid(request) {
 
 module.exports = async function (context, req) {
   context.log("JavaScript HTTP trigger function processed a request.");
-  if (!(await isRequestSignatureValid(context.req))) {
+  const secret = "42e88981-05a9-4e60-8d39-31737447e30b";
+  if (!(await isRequestSignatureValid(context.req, secret))) {
     context.res = {
       status: 401,
     };
