@@ -30,7 +30,8 @@ async function isRequestSignatureValid(request, secret) {
 
 module.exports = async function (context, req) {
   context.log("JavaScript HTTP trigger function processed a request.");
-  const secret = "42e88981-05a9-4e60-8d39-31737447e30b";
+  //For development, this needs to be in local.settings.json. See: https://docs.microsoft.com/en-us/azure/azure-functions/functions-reference-node?tabs=v2#environment-variables
+  const secret = process.env["secret"];
   if (!(await isRequestSignatureValid(context.req, secret))) {
     context.res = {
       status: 401,
