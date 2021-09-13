@@ -42,13 +42,13 @@ try {
     $spamConfidenceLevel = $Request.Body.SpamConfidenceLevel
     $transportRuleName = $Request.Body.TransportRuleName
 
-    if ($domains.Count -lt 1 -or [string]::IsNullOrEmpty($spamConfidenceLevel) -or [string]::IsNullOrEmpty($transportRuleName)) {
+    if ($domains.Count -lt 1 -or !$spamConfidenceLevel -or !$transportRuleName) {
         $statusCode = [HttpStatusCode]::BadRequest
         $msg = "Domain list, transport rule name or spam confidence level is missing"
     } else {
         $svcName = $ENV:ExoSvcAccountName
         $svcPwd = $ENV:ExoSvcPwd
-        if ([string]::IsNullOrEmpty($svcName) -or [string]::IsNullOrEmpty($svcPwd)) {
+        if (!$svcName -or !$svcPwd) {
             $statusCode = [HttpStatusCode]::InternalServerError
             $msg = "Function is not configured correctly"
         } else {
@@ -65,7 +65,7 @@ try {
             $Session.Runspace.Dispose()
         }
     }
-    if (![string]::IsNullOrEmpty($msg)) {
+    if ($msg) {
         Write-Host $msg
     }
 } catch {
