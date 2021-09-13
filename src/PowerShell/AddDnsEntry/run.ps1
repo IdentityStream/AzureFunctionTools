@@ -14,7 +14,7 @@ try {
     $zoneName = $Request.Body.ZoneName
     $resourceGroupName = $Request.Body.ResourceGroupName
     $recordType = $Request.Body.RecordType
-    if ([string]::IsNullOrEmpty($recordType)) {
+    if (!$recordType) {
         $recordType = "A"
     }
 
@@ -26,10 +26,10 @@ try {
         Default {}
     }
 
-    if ([string]::IsNullOrEmpty($dnsRecordName) -or 
-        [string]::IsNullOrEmpty($dnsRecordValue) -or 
-        [string]::IsNullOrEmpty($zoneName) -or
-        [string]::IsNullOrEmpty($resourceGroupName) -or
+    if (!$dnsRecordName -or 
+        !$dnsRecordValue -or 
+        !$zoneName -or
+        !$resourceGroupName -or
         $records.Count -lt 1) {
         $msg = "Body does not contain 'dnsRecordName', 'ip', 'zoneName', 'resourceGroupName' and valid 'recordType' (A, AAAA or CName)"
         Write-Host $msg
