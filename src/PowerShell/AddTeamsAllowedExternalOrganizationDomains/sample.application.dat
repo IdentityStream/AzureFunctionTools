@@ -1,8 +1,8 @@
 {
     "ExternalOrganizationDomain": "acme.com",
     "Authentication": "Application"
-    "VaultName": "TestFunctionSecrets",
-    "CertificateName": "IdentityStreamServiceManagerTest",
-    "ApplicationId": "781a94c0-953d-4e19-8a31-f511aeedc231",
-    "TenantId": "21424df0-f056-40a7-8e1d-df4eae59db6f"
+    "VaultName": "<your-Azure-key-vault-name>",
+    "CertificateName": "<your-certificate-name>",
+    "ApplicationId": "<your-application-id>",
+    "TenantId": "<your-tenant-id>"
 }
