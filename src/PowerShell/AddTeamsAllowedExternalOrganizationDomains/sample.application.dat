@@ -1,0 +1,8 @@
+{
+    "ExternalOrganizationDomain": "acme.com",
+    "Authentication": "Application"
+    "VaultName": "<your-Azure-key-vault-name>",
+    "CertificateName": "<your-certificate-name>",
+    "ApplicationId": "<your-application-id>",
+    "TenantId": "<your-tenant-id>"
+}
