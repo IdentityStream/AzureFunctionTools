@@ -33,11 +33,13 @@ try {
             
             $domainList = @(New-CsEdgeDomainPattern -Domain $domain)
             $domainList += $currentAllowedDomains.AllowedDomain
-            
-            $newAllowList = New-CsEdgeAllowList -AllowedDomain $domainList
-            Set-CsTenantFederationConfiguration -AllowedDomains $newAllowList            
-            $currentAllowedDomains = Get-CsTenantFederationConfiguration | Select-Object -ExpandProperty AllowedDomains
+            $domainList = $domainList | Sort-Object -Property Domain
 
+            Write-Host "Attempt to set the following full allow list in Teams: $domainList"
+            $newAllowList = New-CsEdgeAllowList -AllowedDomain $domainList
+            Set-CsTenantFederationConfiguration -AllowedDomains $newAllowList
+            
+            $currentAllowedDomains = Get-CsTenantFederationConfiguration | Select-Object -ExpandProperty AllowedDomains
             $message = "The domain $domain was successfully added to the list of federation allowed domains in Microsoft Teams. The full allow list is now: $currentAllowedDomains"
         }
     }
